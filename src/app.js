@@ -1,8 +1,10 @@
 /**
  * Created by IlyaLitvinov on 10.04.17.
  */
-class HelloWorld{
+import './styles.styl';
+
+class HelloWorld {
     constructor() {
-        console.log('Hello wolrd');
+        console.log('Hello w5olddrd');
     }
 }
