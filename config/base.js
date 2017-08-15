@@ -8,7 +8,7 @@ const baseConf = (_path) => {
   const htmlSrc = path.normalize(_path + "/src/index.html");
 
   const entry = {
-    application: path.normalize(_path + "/src/app.js")
+    application: path.normalize(_path + "/src/app.ts")
   };
 
   if (dependecies.length !== 0) {
@@ -19,6 +19,10 @@ const baseConf = (_path) => {
     entry,
     output: {
       filename: "[name].js",
+    },
+    resolve: {
+      // Add '.ts' and '.tsx' as resolvable extensions.
+      extensions: [".ts", ".tsx", ".js", ".json"]
     },
     module: {
       rules: [
@@ -31,14 +35,15 @@ const baseConf = (_path) => {
           ]
         },
         {
-          test: /\.js/,
+          test: /\.tsx?$/,
           exclude: /(node_modules)/,
+          enforce: 'pre',
           use: [
             {
-              loader: 'babel-loader',
-              options: {
-                presets: ['env']
-              }
+              loader: 'awesome-typescript-loader'
+            },
+            {
+              loader: 'tslint-loader'
             }
           ]
         },
@@ -64,6 +69,16 @@ const baseConf = (_path) => {
         }
       ]
     },
+
+    // When importing a module whose path matches one of the following, just
+    // assume a corresponding global variable exists and use that instead.
+    // This is important because it allows us to avoid bundling all of our
+    // dependencies, which allows browsers to cache those libraries between builds.
+    externals: {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    },
+
     plugins: [
       new ExtractTextPlugin({
         filename: 'styles.css',
