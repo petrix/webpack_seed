@@ -1,0 +1,22 @@
+@import'../../../../styles/variables.styl';
+$innerPadding=0.5rem;
+
+.task
+	display flex
+	max-width 300px
+	padding $innerPadding
+	box-sizing border-box
+	align-items center
+	position relative
+	box-shadow $blockBoxShadow
+	margin 1rem auto
+	&_title
+		word-break break-all
+		margin 0 $innerPadding
+		flex-basis 80%
+	&_controls
+		position absolute
+		right $innerPadding
+		top $innerPadding
+
+

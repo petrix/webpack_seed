@@ -8,7 +8,7 @@ const baseConf = (_path) => {
   const htmlSrc = path.normalize(_path + "/src/index.html");
 
   const entry = {
-    application: path.normalize(_path + "/src/app.ts")
+    application: path.normalize(_path + "/src/app")
   };
 
   if (dependecies.length !== 0) {
@@ -35,7 +35,7 @@ const baseConf = (_path) => {
           ]
         },
         {
-          test: /\.tsx?$/,
+          test: /\.ts|\.tsx$/,
           exclude: /(node_modules)/,
           enforce: 'pre',
           use: [
@@ -75,8 +75,8 @@ const baseConf = (_path) => {
     // This is important because it allows us to avoid bundling all of our
     // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
-      "react": "React",
-      "react-dom": "ReactDOM"
+      // "react": "React",
+      // "react-dom": "ReactDOM"
     },
 
     plugins: [
@@ -95,7 +95,7 @@ const baseConf = (_path) => {
         "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
         VERSION: JSON.stringify("5fa3b9"),
         BROWSER_SUPPORTS_HTML5: true,
-        "typeof window": JSON.stringify("object")
+        "typeof window": JSON.stringify("object"),
       })
     ]
   };
