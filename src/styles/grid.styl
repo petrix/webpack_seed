@@ -1,0 +1,93 @@
+$xsMobile = 575px;
+$mobile = 768px;
+$tablets = 992px;
+$laptops = 1200px;
+
+.grid-container
+	display flex
+	justify-content center
+	flex-wrap wrap
+	height 100%
+
+
+[class*='col-']
+	box-sizing border-box
+	flex-grow 0
+	flex-shrink 0
+
+
+.flex-grow
+	flex-grow 1
+
+
+.flex-container > [class*='col-']:last-child
+	margin-right auto
+
+.row-reverse
+	flex-direction row-reverse
+
+.column
+	flex-direction column
+
+.column-center
+	flex-direction column
+	justify-content center
+$oneColSize = 8.333333%;
+// Small mobile phones
+@media screen and (max-width: $xsMobile)
+	for colNumber in (1..12)
+		.col-{colNumber}
+			-ms-flex 0 0 colNumber *$oneColSize;
+			flex: 0 0 colNumber *$oneColSize;
+			max-width colNumber *$oneColSize;
+		.col-offset-{colNumber}
+			margin-left colNumber *$oneColSize
+		.hidden
+			display none !important
+// MOBILE large(PHABLET)
+@media screen and (min-width: $xsMobile+1) and (max-width: $mobile)
+	for colNumber in (1..12)
+		.col-sm-{colNumber}
+			-ms-flex 0 0 colNumber *$oneColSize;
+			flex: 0 0 colNumber *$oneColSize;
+			max-width colNumber *$oneColSize;
+		.col-offset-sm-{colNumber}
+			margin-left colNumber *$oneColSize
+		.sm-hidden
+			display none !important
+// IPADS
+@media screen and (min-width: $mobile+1) and (max-width: $tablets)
+	for colNumber in (1..12)
+		.col-md-{colNumber}
+			-ms-flex 0 0 colNumber *$oneColSize;
+			flex: 0 0 colNumber *$oneColSize;
+			max-width colNumber *$oneColSize;
+		.col-offset-md-{colNumber}
+			margin-left colNumber *$oneColSize
+		.md-hidden
+			display none
+// Laptops
+@media screen and (min-width: $tablets+1) and (max-width: $laptops)
+	for colNumber in (1..12)
+		.col-lg-{colNumber}
+			-ms-flex 0 0 colNumber *$oneColSize;
+			flex: 0 0 colNumber *$oneColSize;
+			max-width colNumber *$oneColSize;
+		.col-offset-lg-{colNumber}
+			margin-left colNumber *$oneColSize
+		.pull-lg-left
+			align-items right
+		.lg-hidden
+			display none !important
+
+// Desktops
+@media screen and (min-width: $laptops+1)
+	for colNumber in (1..12)
+		.col-xl-{colNumber}
+			-ms-flex 0 0 colNumber *$oneColSize;
+			flex: 0 0 colNumber *$oneColSize;
+			max-width colNumber *$oneColSize;
+		.col-offset-xl-{colNumber}
+			margin-left colNumber *$oneColSize
+		.xl-hidden
+			display none !important
