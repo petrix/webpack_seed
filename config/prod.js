@@ -10,7 +10,7 @@ const prod = (config, _path) => {
             drop_console: false,
         }
     })];
-    config.plugins = config.plugins.concat(uglify);
+    // config.plugins = config.plugins.concat(uglify);
     config.output.path =  _path;
 
     return config;

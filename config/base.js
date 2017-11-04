@@ -8,7 +8,7 @@ const baseConf = (_path) => {
   const htmlSrc = path.normalize(_path + "/src/index.html");
 
   const entry = {
-    application: path.normalize(_path + "/src/app.js")
+    application: ['babel-polyfill', path.normalize(_path + "/src/app.js")]
   };
 
   if (dependecies.length !== 0) {
