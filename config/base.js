@@ -1,24 +1,45 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-const path = require("path");
+const path = require('path');
 
 const baseConf = (_path) => {
-  const dependecies = Object.keys(require(path.normalize(_path + '/package')).dependencies);
-  const htmlSrc = path.normalize(_path + "/src/index.html");
-
   const entry = {
-    application: ['babel-polyfill', path.normalize(_path + "/src/app.js")]
+    index: ['babel-polyfill', './src/index/index.js'],
+    about: ['babel-polyfill', './src/about/about.js']
   };
+  console.log(_path);
+  const plugins = Object.keys(entry).reduce((acc, name) => {
+    acc.push(new HtmlWebpackPlugin({
+      title: `${name}`,
+      template: `./src/${name}/${name}.html`,
+      chunks: [name],
+      filename: `./${name}.html`,
+    }));
+    acc.push(new ExtractTextPlugin({
+      filename: `styles/[name].css`,
+      allChunks: false
+    }));
 
-  if (dependecies.length !== 0) {
-    entry.vendors = dependecies;
-  }
+    return acc;
+  }, []);
+
+  plugins.concat([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+    }),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      VERSION: JSON.stringify("5fa3b9"),
+      BROWSER_SUPPORTS_HTML5: true,
+      "typeof window": JSON.stringify("object")
+    })
+  ]);
 
   return {
     entry,
     output: {
-      filename: "[name].js",
+      filename: 'js/[name].js',
     },
     module: {
       rules: [
@@ -60,7 +81,7 @@ const baseConf = (_path) => {
            * You can add here any file extension you want to get copied to your output
            */
           test: /\.(png|jpg|jpeg|gif|svg)$/,
-          loader: 'file-loader?name=assets/images/[name].[ext]'
+          loader: 'file-loader?name=/assets/images/[name].[ext]',
         },
         {
           test: /\.(eot|ttf|woff|woff2)$/,
@@ -68,25 +89,7 @@ const baseConf = (_path) => {
         }
       ]
     },
-    plugins: [
-      new ExtractTextPlugin({
-        filename: 'styles.css',
-        disable: false,
-        allChunks: true
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendors',
-      }),
-      new HtmlWebpackPlugin({
-        template: htmlSrc
-      }),
-      new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-        VERSION: JSON.stringify("5fa3b9"),
-        BROWSER_SUPPORTS_HTML5: true,
-        "typeof window": JSON.stringify("object")
-      })
-    ]
+    plugins
   };
 };
 

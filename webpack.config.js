@@ -16,11 +16,12 @@ if (env === "development") {
 }
 
 if (env === "production") {
-   config = prodConfig(config, path.normalize(path.join(_path + "/build")));
+    const tt = path.normalize(path.join(_path + "/build"));
+    console.log('>>>>>' + tt);
+   config = prodConfig(config, tt);
 }
-
 if (env === "publish") {
-  config = prodConfig(config, path.normalize(path.join(_path + "/docs")));
+  config = prodConfig(config, _path + "/docs");
 }
 
 
