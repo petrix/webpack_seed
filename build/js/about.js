@@ -9025,7 +9025,8 @@ module.exports = __webpack_require__(330);
 
 __webpack_require__(331);
 
-console.log('ABOUT');
+document.write('Hello world');
+$('body').addClass('test');
 
 /***/ }),
 /* 331 */
