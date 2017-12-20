@@ -4,16 +4,12 @@ const webpack = require('webpack');
 const path = require("path");
 
 const baseConf = (_path) => {
-  const dependecies = Object.keys(require(path.normalize(_path + '/package')).dependencies);
   const htmlSrc = path.normalize(_path + "/src/index.html");
 
   const entry = {
-    application: ['babel-polyfill', path.normalize(_path + "/src/app.js")]
+    application: ['babel-polyfill', path.normalize(_path + "/src/app.js")],
+    vendors: path.normalize(_path + "/src/vendors.js")
   };
-
-  if (dependecies.length !== 0) {
-    entry.vendors = dependecies;
-  }
 
   return {
     entry,
@@ -43,10 +39,10 @@ const baseConf = (_path) => {
           ]
         },
         {
-          test: /\.styl$/,
+          test: /\.less/,
           loader: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: ['css-loader','autoprefixer-loader?browsers=last 5 version', 'stylus-loader']
+            use: ['css-loader', 'autoprefixer-loader?browsers=last 5 version', 'less-loader']
           })
         },
         {
@@ -79,6 +75,10 @@ const baseConf = (_path) => {
       }),
       new HtmlWebpackPlugin({
         template: htmlSrc
+      }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
       }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
