@@ -1,3 +1,3 @@
-import './about.styl';
+import './about.less';
 document.write('Hello world');
 $('body').addClass('test');

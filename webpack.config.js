@@ -16,10 +16,9 @@ if (env === "development") {
 }
 
 if (env === "production") {
-    const tt = path.normalize(path.join(_path + "/build"));
-    console.log('>>>>>' + tt);
-   config = prodConfig(config, tt);
+    config = prodConfig(config, path.normalize(path.join(_path + "/build")));
 }
+
 if (env === "publish") {
   config = prodConfig(config, _path + "/docs");
 }

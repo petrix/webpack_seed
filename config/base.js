@@ -34,10 +34,10 @@ const baseConf = (_path) => {
             name: VENDORS_NAME,
         }),
         new webpack.DefinePlugin({
-            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-            VERSION: JSON.stringify("5fa3b9"),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            VERSION: JSON.stringify('5fa3b9'),
             BROWSER_SUPPORTS_HTML5: true,
-            "typeof window": JSON.stringify("object")
+            'typeof window': JSON.stringify('object')
         })
     ]);
 
@@ -71,10 +71,10 @@ const baseConf = (_path) => {
                     ]
                 },
                 {
-                    test: /\.styl$/,
+                    test: /\.less/,
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
-                        use: ['css-loader', 'autoprefixer-loader?browsers=last 5 version', 'stylus-loader']
+                        use: ['css-loader', 'autoprefixer-loader?browsers=last 5 version', 'less-loader']
                     })
                 },
                 {
@@ -88,11 +88,11 @@ const baseConf = (_path) => {
                      * You can add here any file extension you want to get copied to your output
                      */
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
-                    loader: 'file-loader?name=/assets/images/[name].[ext]',
+                    loader: 'file-loader?publicPath=../&name=assets/images/[name].[ext]'
                 },
                 {
                     test: /\.(eot|ttf|woff|woff2)$/,
-                    loader: 'file-loader?name=assets/fonts/[name].[ext]'
+                    loader: 'file-loader?publicPath=../&name=assets/fonts/[name].[ext]'
                 }
             ]
         },
