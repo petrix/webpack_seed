@@ -7,7 +7,7 @@
       ]
     },
     "quotemark": [true, "single", "avoid-escape"],
-    "no-any": true,
+    "no-any": false,
     "new-parens": true,
     "no-arg": true,
     "no-bitwise": true,

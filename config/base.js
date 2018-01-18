@@ -48,6 +48,10 @@ const baseConf = (_path) => {
                     ]
                 },
                 {
+                    test: /\.css$/,
+                    use: [ 'style-loader', 'css-loader' ]
+                },
+                {
                     test: /\.less/,
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader',

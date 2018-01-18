@@ -1,4 +1,20 @@
-import * as React from 'react';// eslint-disable-line
-import { render } from 'react-dom';
-import './app.less';
-render(<h1>Hello world</h1>, document.getElementById('root'));
+import * as React from 'react';
+import Child from './Child';
+
+export interface InterfaceAppProps {
+  testMessage: string
+}
+
+const mockItems = ['First', 'Second', 'Third'];
+
+class App extends React.Component<InterfaceAppProps, {}> {
+  render() {
+    return (
+      <div>
+        <Child items={mockItems}/>
+      </div>
+    );
+  }
+}
+
+export default App;
