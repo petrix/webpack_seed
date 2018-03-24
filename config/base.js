@@ -39,10 +39,10 @@ const baseConf = (_path) => {
           ]
         },
         {
-          test: /\.less/,
+          test: /\.scss/,
           loader: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: ['css-loader', 'autoprefixer-loader?browsers=last 5 version', 'less-loader']
+            use: ['css-loader', 'autoprefixer-loader?browsers=last 5 version', 'sass-loader']
           })
         },
         {
