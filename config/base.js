@@ -21,7 +21,7 @@ const baseConf = (_path) => {
             filename: `./${name}.html`,
         }));
         acc.push(new ExtractTextPlugin({
-            filename: `styles/[name].css`,
+            filename: `[name].css`,
             allChunks: false
         }));
 
@@ -45,7 +45,7 @@ const baseConf = (_path) => {
     return {
         entry,
         output: {
-            filename: 'js/[name].js',
+            filename: '[name].js',
         },
         module: {
             rules: [
@@ -87,11 +87,11 @@ const baseConf = (_path) => {
                      * You can add here any file extension you want to get copied to your output
                      */
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
-                    loader: 'file-loader?publicPath=../&name=assets/images/[name].[ext]'
+                    loader: 'file-loader?publicPath=./&name=assets/images/[name].[ext]'
                 },
                 {
                     test: /\.(eot|ttf|woff|woff2)$/,
-                    loader: 'file-loader?publicPath=../&name=assets/fonts/[name].[ext]'
+                    loader: 'file-loader?publicPath=./&name=assets/fonts/[name].[ext]'
                 }
             ]
         },
